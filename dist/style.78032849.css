@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}
+.content {
+    margin: 0 auto;
+    width: 1200px;
+}
+iframe {
+  width: 230px;
+  height: 35px;
+}
+
+/*# sourceMappingURL=/style.78032849.css.map */
