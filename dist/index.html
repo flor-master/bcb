@@ -16,7 +16,8 @@
     <button id="save">Save</button>
   </div>
 
-  <script>css = "\n\n      border: solid 1px gray;\n      box-sizing: border-box;\n    ";
+  <script>var cc = ['4716575402354243', '4556514674756051', '4532501128263554', '5447028556996347', '2720990840310947', '5447864052885133', '36882368836333', '36193289063845', '36530200832800'];
+var css = "\n      border: solid 1px gray;\n      box-sizing: border-box;\n    ";
 var form = window.VGSCollect.create("tntvh2s2ae7", "sandbox", function (state) {
   console.log(state);
 });
@@ -27,7 +28,7 @@ form.field('#cc', {
   showCardIcon: true,
   validations: ['required', 'validCardNumber'],
   css: css,
-  defaultValue: '4111 1111 1111 1111'
+  defaultValue: cc[Math.floor(Math.random() * cc.length)]
 });
 form.field('#exp-date', {
   type: 'card-expiration-date',

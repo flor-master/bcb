@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "@vgs/collect-js": "^0.1.0"
+  },
+  "devDependencies": {
+    "cypress": "^5.4.0"
   }
 }

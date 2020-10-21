@@ -18,8 +18,18 @@
   </div>
 
   <script>
-    css = `
-
+    const cc = [
+      '4716575402354243',
+      '4556514674756051',
+      '4532501128263554',
+      '5447028556996347',
+      '2720990840310947',
+      '5447864052885133',
+      '36882368836333',
+      '36193289063845',
+      '36530200832800'
+    ]
+    const css = `
       border: solid 1px gray;
       box-sizing: border-box;
     `
@@ -33,7 +43,7 @@
       showCardIcon: true,
       validations: ['required', 'validCardNumber'],
       css: css,
-      defaultValue: '4111 1111 1111 1111',
+      defaultValue: cc[Math.floor(Math.random() * cc.length)],
     });
     form.field('#exp-date', {
       type: 'card-expiration-date',
@@ -42,7 +52,7 @@
       showCardIcon: true,
       validations: ['required', 'validCardExpirationDate'],
       css: css,
-      defaultValue: '02/22',
+      defaultValue: '02/22'
     });
     form.field('#cvc', {
       type: 'card-security-code',
