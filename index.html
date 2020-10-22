@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>BCB - Test</title>
   <link rel="stylesheet" href="./css/style.css">
-  <script type="text/javascript" src="https://js.verygoodvault.io/vgs-collect/2.0/vgs-collect.js"></script>
+  <script type="text/javascript" src="https://js.verygoodvault.io/vgs-collect/2.1.0/vgs-collect.js"></script>
 </head>
 <body>
   <div class="content">
@@ -36,33 +36,36 @@
     const form = window.VGSCollect.create("tntvh2s2ae7", "sandbox", function(state) {
       console.log(state)
     });
-    form.field('#cc', {
-      type: 'card-number',
-      name: 'card_number',
-      placeholder: 'Card number',
-      showCardIcon: true,
-      validations: ['required', 'validCardNumber'],
-      css: css,
-      defaultValue: cc[Math.floor(Math.random() * cc.length)],
-    });
-    form.field('#exp-date', {
-      type: 'card-expiration-date',
-      name: 'card_exp_date',
-      placeholder: 'Card Exp Date',
-      showCardIcon: true,
-      validations: ['required', 'validCardExpirationDate'],
-      css: css,
-      defaultValue: '02/22'
-    });
-    form.field('#cvc', {
-      type: 'card-security-code',
-      name: 'card_cvc',
-      placeholder: 'Card CVC',
-      showCardIcon: true,
-      validations: ['required', 'validCardSecurityCode'],
-      css: css,
-      defaultValue: '123',
-    });
+    setTimeout(() => {
+      form.field('#cc', {
+        type: 'card-number',
+        name: 'card_number',
+        placeholder: 'Card number',
+        showCardIcon: true,
+        validations: ['required', 'validCardNumber'],
+        css: css,
+        defaultValue: cc[Math.floor(Math.random() * cc.length)],
+      });
+      form.field('#exp-date', {
+        type: 'card-expiration-date',
+        name: 'card_exp_date',
+        placeholder: 'Card Exp Date',
+        showCardIcon: true,
+        validations: ['required', 'validCardExpirationDate'],
+        css: css,
+        defaultValue: '02/22'
+      });
+      form.field('#cvc', {
+        type: 'card-security-code',
+        name: 'card_cvc',
+        placeholder: 'Card CVC',
+        showCardIcon: true,
+        validations: ['required', 'validCardSecurityCode'],
+        css: css,
+        defaultValue: '123',
+      });
+    }, 1000)
+
     document
       .getElementById('save')
       .addEventListener('click', (e) =>{
