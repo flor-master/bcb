@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>BCB - Test</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script type="text/javascript" src="https://js.verygoodvault.io/vgs-collect/2.2.1-beta/vgs-collect.js"></script>
+</head>
+<body>
+  <div class="content">
+    <div id="cc"></div>
+    <div id="exp-date"></div>
+    <div id="cvc"></div>
+    <button id="save">Save</button>
+  </div>
+
+  <script>
+    const cc = [
+      '4716575402354243',
+      '4556514674756051',
+      '4532501128263554',
+      '5447028556996347',
+      '2720990840310947',
+      '5447864052885133',
+      '36882368836333',
+      '36193289063845',
+      '36530200832800'
+    ]
+    const css = `
+      border: solid 1px gray;
+      box-sizing: border-box;
+    `
+    const form = window.VGSCollect.create("tntvh2s2ae7", "sandbox", function(state) {
+      console.log(state)
+    });
+    setTimeout(() => {
+      form.field('#cc', {
+        type: 'card-number',
+        name: 'card_number',
+        placeholder: 'Card number',
+        showCardIcon: true,
+        validations: ['required', 'validCardNumber'],
+        css: css,
+        defaultValue: cc[Math.floor(Math.random() * cc.length)],
+      });
+      form.field('#exp-date', {
+        type: 'card-expiration-date',
+        name: 'card_exp_date',
+        placeholder: 'Card Exp Date',
+        showCardIcon: true,
+        validations: ['required', 'validCardExpirationDate'],
+        css: css,
+        defaultValue: '02/22'
+      });
+      form.field('#cvc', {
+        type: 'card-security-code',
+        name: 'card_cvc',
+        placeholder: 'Card CVC',
+        showCardIcon: true,
+        validations: ['required', 'validCardSecurityCode'],
+        css: css,
+        defaultValue: '123',
+      });
+    }, 1000)
+
+    document
+      .getElementById('save')
+      .addEventListener('click', (e) =>{
+        e.preventDefault();
+        form.submit('/encrypt-data', {
+          method: 'POST',
+        }, (status, response) => {
+          console.log(response);
+        })
+      });
+
+  </script>
+</body>
+</html>
