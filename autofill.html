@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      .form-control-static iframe {
+        height: 100%;
+        vertical-align: middle;
+      }
+      .form-control-static span.fake-input {
+        background-color: #fff;
+        border: 1px solid #BFBFBF;
+        padding: 1px;
+        height: 27px;
+        position: relative;
+        display: inline-block;
+      }
+      .form-control-static span.fake-area {
+        background-color: #fff;
+        border: 1px solid #BFBFBF;
+        padding: 1px;
+        position: relative;
+        display: inline-block;
+      }
+
+      iframe {
+        border: 0px solid transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="cc-form">
+
+      <div id="cc-name" class="form-group">
+        <label for="cc-name-field">Name</label>
+        <div class="form-control-static">
+          <span class="fake-input"></span>
+        </div>
+      </div>
+
+      <div id="cc-number" class="form-group">
+        <label for="cc-name-field">Number</label>
+        <div class="form-control-static">
+          <span class="fake-input"></span>
+        </div>
+      </div>
+
+      <div id="cc-date" class="form-group">
+        <label for="cc-date">Date</label>
+        <div class="form-control-static">
+          <span class="fake-input"></span>
+        </div>
+      </div>
+
+      <div id="cc-cvv" class="form-group">
+        <label for="cc-cvv">CVV</label>
+        <div class="form-control-static">
+          <span class="fake-input"></span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+
+    <pre id="state"></pre>
+    <pre id="response"></pre>
+    
+    <!-- <script type="text/javascript" src="https://localhost:9000/vgs-collect.js"></script> -->
+    <script src="https://js.verygoodvault.com/vgs-collect/2.3.0/vgs-collect.js"></script>
+    <script type="text/javascript">
+      var f = VGSCollect.create('tntqhq6lasi', 'sandbox', function (state) {
+        document.getElementById('state').innerText = JSON.stringify(state, null, '  ');
+      });
+
+      const cardName = f.field('#cc-name .fake-input', {
+        elementId: 'cc-name',
+        type: 'text',
+        name: 'cc-name',
+        placeholder: 'John Doe',
+        validations: ['required'],
+        autoComplete: 'cc-name',
+      });
+
+      const cardNumber = f.field('#cc-number .fake-input', {
+        elementId: 'cc-number-field',
+        type: 'card-number',
+        name: 'number',
+        placeholder: '4111 1111 1111 1111',
+        validations: ['required', 'validCardNumber'],
+        showCardIcon: true,
+        autoComplete: 'cc-number',
+      });
+
+      f.field('#cc-date .fake-input', {
+        elementId: 'cc-expiration-date-field',
+        type: 'card-expiration-date',
+        name: 'expirationDate',
+        placeholder: '01 / 2016',
+        validations: ['required', 'validCardExpirationDate'],
+        autoComplete: 'cc-exp',
+      });
+    
+      f.field('#cc-cvv .fake-input', {
+        elementId: 'cc-cvc-field',
+        type: 'card-security-code',
+        name: 'cvc',
+        placeholder: '344',
+        validations: ['required', 'validCardSecurityCode'],
+        autoComplete: 'cc-csc',
+      });
+      
+      document.getElementById('cc-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        f.submit('/post', {
+          serialization: 'formData',
+          headers: {
+            "X-Requested-With": "VgRequestFrame",
+          }
+        }, function(status, data) {
+          document.getElementById('response').innerText = JSON.stringify(data, null, '  ');
+        });
+      }, false);
+    </script>
+  </body>
+</html>
